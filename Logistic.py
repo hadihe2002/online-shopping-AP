@@ -38,6 +38,8 @@ def allocate_delivery():
 
     if county == 1:
         results['delivery_type'] = "BikeDelivery"
+    else:
+        results['delivery_type'] = "Post"
 
     results['county'] = county
     results['city'] = city
