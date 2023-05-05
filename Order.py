@@ -59,29 +59,27 @@ class Market:
 
             if x == 0:          #If the ordered product wasn't in the Market.
                 print("Sorry, We don't have this product in our market.")
-            
-            
-            print('Payable fee = ', payable_fee, '$')
-
-                #else:  if request_name was not in Market?
+           
+            print('Payable fee = ', payable_fee, '$')        #Show the total cost in dollars.
                 
-            end = int(input('Continue or Done? (Continue = 1, Done = 0)  '))  
+            end = int(input('Continue or Done? (Continue = 1, Done = 0)  '))          #Continue or stop the purchase process.
                     
     
         def Checkout(order_list, order_number, order_price, payable_fee):
             print('\nPlease enter your information')
-            
+            #Get information about customer.
             first_name = input('First Name: ')
             last_name = input('Last Name: ')
             address = input('Address: ')
             phone_number = input('Phone Number: ')
             delivery_time = input('Delivery Time: ')
-            
+            #Extra:  Show current time.
             import time
             current_time = time.localtime()
             print('\nTime: ', time.strftime("%H:%M:%S", current_time), '\n')
             
-            def allocate_delivery():
+            #Delivery type: Post or BikeDelivery. We will use it for COSTUMER PURCHASE FACTOR.
+            def allocate_delivery():         
                 results = {"county": 0, "city": 0, "delivery_type": ""}
                 county = int(input("Which County Are You In (1: Tehran, 2: Isfahan, 3: Tabriz): "))
                 if county == 1:
@@ -102,40 +100,42 @@ class Market:
             results = allocate_delivery()
             
             def Payment(order_list, order_number, order_price, payable_fee, results):
-                
+                #Create random order number.
                 from random import randint
                 order_number = randint(10**10, (10**11)-1)
                 print('Order Number: ', order_number)
-                card_number = input('Please enter your card number: ')
+                
+                card_number = input('Please enter your card number: ')           #Get bank card number.
                 
                 print('\nSHOPPING PORTAL CONFIRMATION WAS SAVED.')
-                if len(card_number) == 16:
+                if len(card_number) == 16:        #If the number of digits of the card number was 16.
                     shopping_portal_confirmation = ['First Name: ' + first_name, 'Last Name: ' + last_name, 'Card Number: ' + card_number]
-                    confirmation_txt = open('confirmation', 'w')
+                    confirmation_txt = open('confirmation', 'w')           #Create a text file.
                     confirmation_txt.write('SHOPPING PORTAL CONFIRMATION\n\n')
-                    confirmation_txt.write('\n'.join(shopping_portal_confirmation))
+                    confirmation_txt.write('\n'.join(shopping_portal_confirmation))         #Add shopping_portal_confirmation list members line by line to the file.
                     confirmation_txt.write('\n\nPayment is Successful')
                     confirmation_txt.close()
                     
                     print('\nCOSTUMER PURCHASE FACTOR WAS SAVED.')
                     order = 'Order:  '
-                    for i in range(len(order_list)):    #if we have several of cap?
+                    for i in range(len(order_list)):         #Creating a customer's shopping cart.
                         order += str(order_list[i]) + ' = ' + str(order_price[i]) + '$  ||  '
                     
-                    factor_txt = open('COSTUMER PURCHASE FACTOR', 'w')
+                    factor_txt = open('COSTUMER PURCHASE FACTOR', 'w')           #Create a text file.
                     costumer_purchase_factor = [order, 'TOTAL COST = ' + str(payable_fee), 'Order Number: ' + str(order_number), 'Full Name: ' + first_name + ' ' + last_name, 'Address: ' + address, 'Delivery Time: ' + delivery_time, 'Delivery Type: ' + results['delivery_type']]
-                    factor_txt.write('COSTUMER PURCHASE FACTOR\n\n')
+                    factor_txt.write('COSTUMER PURCHASE FACTOR\n\n')         #Add costumer_purchase_factor list members line by line to the file.
                     factor_txt.write('\n'.join(costumer_purchase_factor))
                     factor_txt.close()
                 
-                else:
+                else:          #If the number of digits of the card number was not 16.
                     shopping_portal_confirmation = ['First Name: ' + first_name, 'Last Name: ' + last_name, 'Card Number: ' + card_number]
-                    confirmation_txt = open('confirmation', 'w')
+                    confirmation_txt = open('confirmation', 'w')           #Create a text file.
                     confirmation_txt.write('SHOPPING PORTAL CONFIRMATION\n\n')
-                    confirmation_txt.write('\n'.join(shopping_portal_confirmation))
+                    confirmation_txt.write('\n'.join(shopping_portal_confirmation))            #Add shopping_portal_confirmation list members line by line to the file.
                     confirmation_txt.write('\n\nPayment is not Successful')
                     confirmation_txt.close()
                     
+#Calling functions.                    
             Payment(order_list, order_number, order_price, payable_fee, results)   
         Checkout(order_list, order_number, order_price, payable_fee)
     Shopping_cart(list_products)
