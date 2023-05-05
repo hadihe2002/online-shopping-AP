@@ -5,15 +5,18 @@ Isfahan = {1: "Isfahan1", 2: "Isfahan2"}
 Tabriz = {1: "Tabriz1", 2: "Tabriz2"}
 
 
-def check_postal_code(postal_code):
-    if len(postal_code) == 10:
-        return True
-    return False
+def get_postal_code():
+    while True:
+        postal_code = input("Enter Your Postal Code: ")
+        if len(postal_code) != 10:
+            print("Postal Code Should Have 10 Digits. Try Again!")
+        break
+    return postal_code
 
 
 def get_delivery_times():
     free_times = []
-    for time, order in delivery_times:
+    for time, order in delivery_times.items():
         if time == "morning":
             free_times.append(time)
         if time == "noon" and order < 3:
@@ -23,10 +26,22 @@ def get_delivery_times():
     return free_times
 
 
-def allocate_delivery(county_number):
-    if county_number == 1:
-        return "BikeDelivery"
-    return "Post"
+def allocate_delivery():
+    results = {"county": 0, "city": 0, "delivery_type": ""}
+    county = int(input("Which County Are You In (1: Tehran, 2: Isfahan, 3: Tabriz): "))
+    if county == 1:
+        city = input("Which City Are You In: (1: Tehran1, 2: Tehran2)")
+    if county == 2:
+        city = input("Which City Are You In: (1: Isfahan1, 2: Isfahan2)")
+    if county == 3:
+        city = input("Which City Are You In: (1: Tabriz1, 2: Tabriz2)")
+
+    if county == 1:
+        results['delivery_type'] = "BikeDelivery"
+
+    results['county'] = county
+    results['city'] = city
+    return results
 
 
 def update_delivery_times(time):
@@ -34,20 +49,36 @@ def update_delivery_times(time):
     return delivery_times
 
 
-def estimate_delivery_time(time):
-    delivery_times = update_delivery_times(time)
+def estimate_delivery_time():
+    results = {"time": "", "estimate": 0}
+    free_delivery_times = ", ".join(get_delivery_times())
+    estimate = 0
+
+
+    while True:
+        time = input(f'Enter Time For Delivery({free_delivery_times}): ')
+        if time in get_delivery_times():
+            delivery_times = update_delivery_times(time)
+            break
+        else: 
+            print("Please Enter Time Between Free Delivery Times: ")
 
     number = delivery_times[time] // 6
+
     if time == "morning":
-        return 6 + number
+        estimate = 6 + number
     if time == "noon":
-        return 12 + number
+        estimate = 12 + number
     if time == "afternoon":
-        return 18 + number
+        estimate = 18 + number
+
+    results['estimate'] = estimate
+    results['time'] = time
+
+    return results
 
 
 def allocate_delivery_price(time, delivery):
-    price = 0
     if time == "morning":
         if delivery == "BikeDelivery":
             price = 30
@@ -65,3 +96,5 @@ def allocate_delivery_price(time, delivery):
             price = 100
         if delivery == "Post":
             price = 50
+
+    return price
