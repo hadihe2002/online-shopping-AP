@@ -1,5 +1,5 @@
 class Product:
-    
+    #Create attributes.
     def __init__(self, name, size, number, price, code):
         self.name = name
         self.size = size
@@ -9,6 +9,7 @@ class Product:
              
 
 class Market:
+    #All products in the Market with attributions in class Product.
     SAMSUNG_A30 = Product('SAMSUNG A30', '6.4 inch', 40, 200, 1)
     SAMSUNG_A50 = Product('SAMSUNG A50', '6.4 inch', 60, 300, 2)
     SAMSUNG_A70 = Product('SAMSUNG A70', '6.7 inch', 90, 500, 3)
@@ -19,46 +20,44 @@ class Market:
     list_products = [SAMSUNG_A30, SAMSUNG_A50, SAMSUNG_A70, SAMSUNG_S07, SAMSUNG_S10, SAMSUNG_S20]
         
     def Shopping_cart(list_products):
-        payable_fee = 0
+        payable_fee = 0      #Cost of orders.
         end = 1
-        order_list = []
-        order_number = []
-        order_price = []
+        order_list = []      #A list of the names of the products we order.
+        order_number = []    #A list of the number of the products we order.
+        order_price = []     #A list of the price (cost) of the products we order.
         
         while end == 1:
+            #Create inventory.
             print('       I N V E N T O R Y        ')
-            print(1*' ', 'PRODUCT', 7*' ', 'SIZE', 6*' ', 'QUANTITY', 4*' ', 'PRICE')     #I can aks for it.
+            print(1*' ', 'PRODUCT', 7*' ', 'SIZE', 6*' ', 'QUANTITY', 4*' ', 'PRICE')     #Spaces are for design.
             
-
             for i in list_products:
-                if i.number == 0:
+                if i.number == 0:       #If the desired number of products is 0.
                     i.number = 'unavailable'
-                print(i.name, 3*' ', i.size, (8 - len(str(i.number))//2)*' ', i.number, (8 - (len(str(i.number))-1)//2)*' ', i.price)
+                print(i.name, 3*' ', i.size, (8 - len(str(i.number))//2)*' ', i.number, (8 - (len(str(i.number))-1)//2)*' ', i.price)    #Spaces are for design.
 
-                
-                
+            #Taking orders.    
             request_name = input('Please enter your product: ')
             request_number = int(input('How many do you want: '))
-            
-            x = 0
-  
+           
+            x = 0          #We will use this variable when the ordered product is not in the Market.
             for product in list_products:
                 if request_name == product.name:
                     x += 1
                     if product.number != 'unavailable':
                         if request_number <= product.number:
-                            product.number -= request_number
-                            payable_fee += request_number * product.price
-                            order_list.append(product.name)
-                            order_number.append(request_number)
-                            order_price.append(product.price * request_number)
-                        else:
+                            product.number -= request_number            #Reduce order quantity from inventory.
+                            payable_fee += request_number * product.price          #Add the cost of the product to the total cost of the order.
+                            order_list.append(product.name)         #Add the ordered product to the order list.
+                            order_number.append(request_number)          #Add the number of ordered product to the product list.
+                            order_price.append(product.price * request_number)          #Add the cost of ordered product to the product list.
+                        else:          #If you order an item that is not available in the store in sufficient quantity.
                             print("Sorry, We don't have enough of this product. Please check the inventory.")
                             break
-                    else:
+                    else:           #If you order a product that is not available.
                         print("This product is unavailable.")
 
-            if x == 0:
+            if x == 0:          #If the ordered product wasn't in the Market.
                 print("Sorry, We don't have this product in our market.")
             
             
