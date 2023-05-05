@@ -6,9 +6,7 @@ class Product:
         self.number = number
         self.price = price
         self.code = code
-        
-#when we order product for several times.
-#sending method in factor.        
+             
 
 class Market:
     SAMSUNG_A30 = Product('SAMSUNG A30', '6.4 inch', 40, 200, 1)
