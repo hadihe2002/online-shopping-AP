@@ -48,6 +48,8 @@ class StorageSystem:
 
 end = 1
 
+warehouse = StorageSystem()
+
 while end != 0:
     print("Please enter your command and the rest of the required information:")
     print("For updating after an order, enter the product code and the quantity.")
@@ -59,24 +61,24 @@ while end != 0:
     if command[0] == "order":
         product_code = int(command[1])
         quantity = int(command[2])
-        StorageSystem.update_storage_after_order(product_code, quantity)
+        warehouse.update_storage_after_order(product_code, quantity)
         print("Storage updated successfully.")
     elif command[0] == "update_csv":
         file_path = command[1]
-        StorageSystem.update_storage_as_manager_csv(file_path)
+        warehouse.update_storage_as_manager_csv(file_path)
         print("Storage updated successfully.")
     elif command[0] == "update_input":
         product_code = int(command[1])
         new_quantity = int(command[2])
-        StorageSystem.update_storage_as_manager_input(product_code, new_quantity)
+        warehouse.update_storage_as_manager_input(product_code, new_quantity)
         print("Storage updated successfully.")
     elif command[0] == "add":
         product_code = int(command[1])
         additional_quantity = int(command[2])
-        StorageSystem.add_to_storage_as_manager(product_code, additional_quantity)
+        warehouse.add_to_storage_as_manager(product_code, additional_quantity)
         print("Storage updated successfully.")
     elif command[0] == "export_csv":
-        StorageSystem.get_available_products_csv()
+        warehouse.get_available_products_csv()
         print("The available products have been exported to `available_products.csv`.")
     else:
         print("Invalid command")
