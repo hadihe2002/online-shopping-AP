@@ -27,14 +27,20 @@ def get_delivery_times():
 
 
 def allocate_delivery():
-    results = {"county": 0, "city": 0, "delivery_type": ""}
-    county = int(input("Which County Are You In (1: Tehran, 2: Isfahan, 3: Tabriz): "))
+    results = {"county": 0, "city": 0, "delivery_type": "", 'description': ""}
+    try:
+        county = int(
+            input("Which County Are You In (1: Tehran, 2: Isfahan, 3: Tabriz): "))
+    except:
+        print("Enter a valid number: ")
     if county == 1:
-        city = input("Which City Are You In: (1: Tehran1, 2: Tehran2)")
+        city = input("Which City Are You In: (1: Tehran1, 2: Tehran2): ")
     if county == 2:
-        city = input("Which City Are You In: (1: Isfahan1, 2: Isfahan2)")
+        city = input("Which City Are You In: (1: Isfahan1, 2: Isfahan2): ")
     if county == 3:
-        city = input("Which City Are You In: (1: Tabriz1, 2: Tabriz2)")
+        city = input("Which City Are You In: (1: Tabriz1, 2: Tabriz2): ")
+
+    description = input("Type Description For Your Address: ")
 
     if county == 1:
         results['delivery_type'] = "BikeDelivery"
@@ -43,6 +49,7 @@ def allocate_delivery():
 
     results['county'] = county
     results['city'] = city
+    results['description'] = description
     return results
 
 
@@ -56,13 +63,12 @@ def estimate_delivery_time():
     free_delivery_times = ", ".join(get_delivery_times())
     estimate = 0
 
-
     while True:
         time = input(f'Enter Time For Delivery({free_delivery_times}): ')
         if time in get_delivery_times():
             delivery_times = update_delivery_times(time)
             break
-        else: 
+        else:
             print("Please Enter Time Between Free Delivery Times: ")
 
     number = delivery_times[time] // 6
