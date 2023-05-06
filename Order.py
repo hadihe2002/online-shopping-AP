@@ -2,9 +2,6 @@ from Storage import warehouse
 from Logistic import allocate_delivery, estimate_delivery_time, allocate_delivery_price
 from Accountant import save_order
 
-global factors
-factors = 0
-
 
 class Product:
     # Create attributes.
@@ -19,7 +16,6 @@ class Product:
 def run_cli():
     class Market:
 
-        factors = 0
         # All products in the Market with attributions in class Product.
         SAMSUNG_A30 = Product('SAMSUNG A30', '6.4 inch',
                               warehouse.warehouse[1], 200, 1)
@@ -129,7 +125,7 @@ def run_cli():
                     print('\nSHOPPING PORTAL CONFIRMATION WAS SAVED.')
                     # If the number of digits of the card number was 16.
                     if len(card_number) == 16:
-                        factors += 1
+
                         shopping_portal_confirmation = [
                             'First Name: ' + first_name, 'Last Name: ' + last_name, 'Card Number: ' + card_number]
                         # Create a text file.
