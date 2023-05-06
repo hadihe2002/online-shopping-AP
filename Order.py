@@ -79,7 +79,7 @@ class Market:
             print('\nTime: ', time.strftime("%H:%M:%S", current_time), '\n')
             
             #Delivery type: Post or BikeDelivery. We will use it for COSTUMER PURCHASE FACTOR.
-            def allocate_delivery():         
+            def allocate_delivery():
                 results = {"county": 0, "city": 0, "delivery_type": ""}
                 county = int(input("Which County Are You In (1: Tehran, 2: Isfahan, 3: Tabriz): "))
                 if county == 1:
@@ -91,10 +91,11 @@ class Market:
 
                 if county == 1:
                     results['delivery_type'] = "BikeDelivery"
+                else:
+                    results['delivery_type'] = "Post"
 
                 results['county'] = county
                 results['city'] = city
-                
                 return results
             
             results = allocate_delivery()
