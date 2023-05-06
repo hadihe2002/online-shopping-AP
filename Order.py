@@ -28,7 +28,7 @@ class Market:
         
         while end == 1:
             #Create inventory.
-            print('       I N V E N T O R Y        ')
+            print('               I N V E N T O R Y                    ')
             print(1*' ', 'PRODUCT', 7*' ', 'SIZE', 6*' ', 'QUANTITY', 4*' ', 'PRICE')     #Spaces are for design.
             
             for i in list_products:
@@ -104,7 +104,7 @@ class Market:
                 #Create random order number.
                 from random import randint
                 order_number = randint(10**10, (10**11)-1)
-                print('Order Number: ', order_number)
+                print('\nOrder Number: ', order_number)
                 
                 card_number = input('Please enter your card number: ')           #Get bank card number.
                 
