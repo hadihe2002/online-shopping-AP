@@ -17,7 +17,7 @@ class Market:
     SAMSUNG_S10 = Product('SAMSUNG S10', '6.1 inch', 50, 400, 5)
     SAMSUNG_S20 = Product('SAMSUNG S20', '6.2 inch', 80, 600, 6)
     
-    list_products = [SAMSUNG_A30, SAMSUNG_A50, SAMSUNG_A70, SAMSUNG_S07, SAMSUNG_S10, SAMSUNG_S20]
+    list_products = [SAMSUNG_A30, SAMSUNG_A50, SAMSUNG_A70, SAMSUNG_S07, SAMSUNG_S10, SAMSUNG_S20]       #A list of products.
         
     def Shopping_cart(list_products):
         payable_fee = 0      #Cost of orders.
@@ -42,7 +42,7 @@ class Market:
            
             x = 0          #We will use this variable when the ordered product is not in the Market.
             for product in list_products:
-                if request_name == product.name:
+                if request_name == product.name:            #Match the requested item with Market items.
                     x += 1
                     if product.number != 'unavailable':
                         if request_number <= product.number:
@@ -90,9 +90,9 @@ class Market:
                     city = input("Which City Are You In: (1: Tabriz1, 2: Tabriz2)")
 
                 if county == 1:
-                    results['delivery_type'] = "BikeDelivery"
+                    results['delivery_type'] = "BikeDelivery"         #If you are from Tehran.
                 else:
-                    results['delivery_type'] = "Post"
+                    results['delivery_type'] = "Post"                 #If you are not from Tehran.
 
                 results['county'] = county
                 results['city'] = city
