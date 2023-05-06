@@ -1,6 +1,0 @@
-class Wearhouse:
-    ...
-
-
-class Logestic:
-    ...
